@@ -3,7 +3,7 @@
 First clone this repo by the following command:
 
 ```sh
-git clone --recurse-submodules git://github.com/foo/bar.git
+git clone --recurse-submodules https://github.com/DCsunset/fuzzer-test-suite.git
 ```
 
 To run one or more projects:
