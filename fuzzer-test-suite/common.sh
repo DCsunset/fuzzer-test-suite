@@ -3,7 +3,7 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 
 # Don't allow to call these scripts from their directories.
-[ -e $(basename $0) ] && echo "PLEASE USE THIS SCRIPT FROM ANOTHER DIR" && exit 1
+#[ -e $(basename $0) ] && echo "PLEASE USE THIS SCRIPT FROM ANOTHER DIR" && exit 1
 
 # Ensure that fuzzing engine, if defined, is valid
 FUZZING_ENGINE=${FUZZING_ENGINE:-"fsanitize_fuzzer"}
