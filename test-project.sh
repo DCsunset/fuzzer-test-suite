@@ -3,20 +3,17 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 set -e
 
-BASEDIR=$(readlink -f $(dirname $0))
 cd fuzzer-test-suite
 
 export FUZZING_ENGINE="afl"
 . $(dirname $0)/common.sh
-
-AVAIL_PROJ=(boringssl freetype2 guetzli harfbuzz json lcms libarchive libjpeg libpng libssh libxml2 llvm-libcxxabi openssl-1.0.1f openssl-1.1.0c pcre2 proj4 re2 sqlite vorbis woff2)
+. $(dirname $0)/config.sh
 
 if [ "$#" -eq 0 ]; then
 	echo "Usage: ./test-project.sh <name>"
 	exit 1
 fi
 
-PARENT_DIR="$BASEDIR/RUN_EXPERIMENT"
 #[[ -e "$PARENT_DIR" ]] && echo "Rename folder $PARENT_DIR to avoid deletion" && exit 1
 rm -rf $PARENT_DIR
 mkdir $PARENT_DIR
