@@ -1,3 +1,7 @@
+## Requirements
+
+* `clang`
+
 ## Usage
 
 First clone this repo by the following command:
