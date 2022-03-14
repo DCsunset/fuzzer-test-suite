@@ -3,11 +3,11 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 set -e
 
+. $(dirname $0)/config.sh
 cd fuzzer-test-suite
 
 export FUZZING_ENGINE="afl"
 . $(dirname $0)/common.sh
-. $(dirname $0)/config.sh
 
 if [ "$#" -eq 0 ]; then
 	echo "Usage: ./test-project.sh <name>"
