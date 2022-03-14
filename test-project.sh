@@ -6,9 +6,10 @@ set -e
 BASEDIR=$(readlink -f $(dirname $0))
 cd fuzzer-test-suite
 
+export FUZZING_ENGINE="afl"
 . $(dirname $0)/common.sh
 
-AVAILABLE_PROJ=(boringssl c-ares freetype2 guetzli)
+AVAIL_PROJ=(boringssl c-ares freetype2 guetzli)
 
 if [ "$#" -eq 0 ]; then
 	echo "Usage: ./test-project.sh <name>"
@@ -24,10 +25,21 @@ echo "Created top directory $PARENT_DIR"
 ABS_SCRIPT_DIR=$(readlink -f $SCRIPT_DIR)
 
 for name in $@; do
+	found=0
+	for i in "${AVAIL_PROJ[@]}"; do
+		if [ "$i" == "$name" ]; then
+			found=1
+			break
+		fi
+	done
+	if [ "$found" -eq 0 ]; then
+		echo "Project $name not available"
+		exit 1
+	fi
+
 	BENCHMARKS="${ABS_SCRIPT_DIR}/${name}*/"
 	for f in $BENCHMARKS
 	do
-		echo Running Project $f
 		file_name="$(basename $f)"
 		[[ ! -d $f ]] && continue # echo "${file_name} isn't a directory" && continue
 		[[ ! -e ${f}build.sh ]] && continue # echo "${file_name} has no build script" && continue
