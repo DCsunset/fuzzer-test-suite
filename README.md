@@ -16,5 +16,5 @@ To run one or more projects:
 ./test-project.sh <name(s)>
 ```
 
-The available projects are listed in the variable `AVAIL_PROJ` in file `./test-project.sh`.
+The available projects are listed in the variable `AVAIL_PROJ` in file `./config.sh`.
 
