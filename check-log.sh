@@ -28,7 +28,9 @@ for name in $@; do
 	for f in $BENCHMARKS
 	do
 		file_name="$(basename $f)"
-		echo "Checking log $file_name"
+		printf "Checking log $file_name\n"
+		printf "=======================\n\n"
 		tail $TAIL_FLAGS $f 
+		printf "\n\n\n"
 	done
 done
