@@ -9,6 +9,8 @@ if [ "$#" -eq 0 ]; then
 	exit 1
 fi
 
+TAIL_FLAGS=${TAIL_FLAGS:-""}
+
 for name in $@; do
 	found=0
 	for i in "${AVAIL_PROJ[@]}"; do
@@ -27,6 +29,6 @@ for name in $@; do
 	do
 		file_name="$(basename $f)"
 		echo "Checking log $file_name"
-		tail -f $f 
+		tail $TAIL_FLAGS $f 
 	done
 done
