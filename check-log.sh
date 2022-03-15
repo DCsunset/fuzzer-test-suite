@@ -22,11 +22,11 @@ for name in $@; do
 		exit 1
 	fi
 
-	BENCHMARKS="${PARENT_DIR}/from-${name}*/"
+	BENCHMARKS="${PARENT_DIR}/from-${name}*"
 	for f in $BENCHMARKS
 	do
 		file_name="$(basename $f)"
 		echo "Checking log $file_name"
-		tail -f $file_name 
+		tail -f $f 
 	done
 done
