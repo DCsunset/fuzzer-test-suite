@@ -4,10 +4,11 @@
 
 ## Usage
 
-First clone this repo by the following command:
+First clone this repo by the following commands:
 
 ```sh
 git clone --recurse-submodules https://github.com/DCsunset/fuzzer-test-suite.git
+./patch-fuzzer-test-suite.sh
 ```
 
 To run one or more projects:
@@ -17,4 +18,10 @@ To run one or more projects:
 ```
 
 The available projects are listed in the variable `AVAIL_PROJ` in file `./config.sh`.
+
+To stop the running projects:
+
+```sh
+./kill-all.sh
+```
 
