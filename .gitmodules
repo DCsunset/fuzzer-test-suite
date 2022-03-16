@@ -1,3 +1,6 @@
 [submodule "AFL"]
 	path = AFL
 	url = https://github.com/google/AFL.git
+[submodule "fuzzer-test-suite"]
+	path = fuzzer-test-suite
+	url = https://github.com/google/fuzzer-test-suite.git
