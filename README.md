@@ -1,6 +1,8 @@
-## Requirements
+## Depenedencies
 
 * `clang`
+* `libpng`
+* `libarchive-dev`
 
 ## Usage
 
