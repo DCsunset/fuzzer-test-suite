@@ -6,7 +6,6 @@ set -e
 . $(dirname $0)/config.sh
 cd fuzzer-test-suite
 
-export FUZZING_ENGINE="afl"
 . $(dirname $0)/common.sh
 
 if [ "$#" -eq 0 ]; then
