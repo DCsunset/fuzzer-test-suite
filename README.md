@@ -14,6 +14,14 @@ git clone --recurse-submodules https://github.com/DCsunset/fuzzer-test-suite.git
 ./patch-libfuzzer.sh
 ```
 
+For AFL, configure the kernel parameters:
+
+```sh
+echo core | sudo tee /proc/sys/kernel/core_pattern
+cd /sys/devices/system/cpu
+echo performance | sudo tee cpu*/cpufreq/scaling_governor
+```
+
 To run one or more projects:
 
 ```sh
