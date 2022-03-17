@@ -3,5 +3,5 @@
 
 for i in "${AVAIL_PROJ[@]}"; do
 	echo Killing $i
-	pkill $i
+	pkill -9 $i
 done
