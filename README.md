@@ -10,8 +10,7 @@ First clone this repo by the following commands:
 
 ```sh
 git clone --recurse-submodules https://github.com/DCsunset/fuzzer-test-suite.git
-./patch-fuzzer-test-suite.sh
-./patch-libfuzzer.sh
+./init.sh
 ```
 
 For AFL, configure the kernel parameters:
