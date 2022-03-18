@@ -4,6 +4,8 @@
 * `libpng`
 * `libarchive-dev`
 
+For data analysis, install [afl-utils](https://gitlab.com/rc0r/afl-utils.git).
+
 ## Usage
 
 First clone this repo by the following commands:
