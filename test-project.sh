@@ -14,9 +14,7 @@ if [ "$#" -eq 0 ]; then
 fi
 
 #[[ -e "$PARENT_DIR" ]] && echo "Rename folder $PARENT_DIR to avoid deletion" && exit 1
-rm -rf $PARENT_DIR
-mkdir $PARENT_DIR
-echo "Created top directory $PARENT_DIR"
+mkdir -p $PARENT_DIR
 
 ABS_SCRIPT_DIR=$(readlink -f $SCRIPT_DIR)
 
