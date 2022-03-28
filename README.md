@@ -1,7 +1,7 @@
 ## Depenedencies
 
 * `clang`
-* `libpng`
+* `libpng-dev`
 * `libarchive-dev`
 
 For data analysis, install [afl-utils](https://gitlab.com/rc0r/afl-utils.git).
