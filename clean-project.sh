@@ -23,8 +23,9 @@ for name in $@; do
 	BENCHMARKS="${PARENT_DIR}/RUNDIR-${name}*/"
 	for f in $BENCHMARKS
 	do
-		echo "Deleting $f"
-		rm -rf $f
+		file_name="$(basename $f)"
+		echo "Deleting $file_name from-${file_name#RUNDIR-}.out"
+		rm -rf $f rm -rf ${PARENT_DIR}/from-${file_name#RUNDIR-}.out
 	done
 done
 
