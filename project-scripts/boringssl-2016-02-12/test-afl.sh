@@ -1,11 +1,11 @@
 #!/bin/bash
 . $(dirname $0)/../../fuzzer-test-suite/common.sh
 
-EXECUTABLE_NAME_COVERAGE=$(basename $SCRIPT_DIR)-coverage
-
 set -x
 rm -rf $CORPUS
 mkdir $CORPUS
+
+EXECUTABLE_NAME_COVERAGE=$(basename $SCRIPT_DIR)-coverage
 
 seed_dirs="$CORPUS/fuzzer1/queue"
 # Master
@@ -16,6 +16,6 @@ for i in $(seq 2 $JOBS); do
 	[ -e $EXECUTABLE_NAME_BASE ] && $AFL_SRC/afl-fuzz -m 800 -i seeds -o $CORPUS -S fuzzer$i ./$EXECUTABLE_NAME_BASE @@ &> fuzzer$i.log &
 done
 
-sleep 20
+sleep 10
 # Monitor and execute seeds to get coverage
 $(dirname $0)/../../coverage-monitor.sh "$seed_dirs" ./$EXECUTABLE_NAME_COVERAGE &> coverage-monitor.log &
