@@ -1,8 +1,10 @@
 ## Depenedencies
 
+* `gcc`
 * `clang`
 * `libpng-dev`
 * `libarchive-dev`
+* `inotify-tools`
 
 For data analysis, install [afl-utils](https://gitlab.com/rc0r/afl-utils.git).
 
