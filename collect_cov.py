@@ -11,7 +11,7 @@ def main(argv):
         return
 
     project_name = argv[0] # eg. "json-2017-02-12"
-    project_path = "/RUN_EXPERIMENT/RUNDIR-" + project_name + "/"  # hardcode path eg. /RUN_EXPERIMENT/RUNDIR-json-2017-02-12/
+    project_path = "./RUN_EXPERIMENT/RUNDIR-" + project_name + "/"  # hardcode path eg. /RUN_EXPERIMENT/RUNDIR-json-2017-02-12/
     project_short_name = project_name.split("-")[0]
     project_name_afl =  project_name + "-afl"
     corpus_folder_name = "CORPUS-" + project_name_afl
@@ -22,7 +22,7 @@ def main(argv):
         f = open(report_file_name, "a")
 
         # afl-collect -r ./CORPUS-boringssl-2016-02-12-afl ./collect_crash -- boringssl-2016-02-12-afl @@
-        command_line_afl =  "afl-collect -r ." + project_path + corpus_folder_name + " ./collect_crash -- " + project_path + project_name_afl + " @@" 
+        command_line_afl =  "afl-collect -r " + project_path + corpus_folder_name + " ./collect_crash -- " + project_path + project_name_afl + " @@" 
         split_afl = shlex.split(command_line_afl)
         process = subprocess.run(split_afl, capture_output=True)
         output = process.stdout.decode("utf-8")
