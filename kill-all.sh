@@ -5,3 +5,5 @@ for i in "${AVAIL_PROJ[@]}"; do
 	echo Killing $i
 	pkill -9 $i
 done
+
+pkill coverage-monitor.sh

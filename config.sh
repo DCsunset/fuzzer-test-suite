@@ -7,5 +7,6 @@ export FUZZING_ENGINE="afl"
 export AFL_SRC=$BASEDIR/AFL
 
 # disable ASAN for afl
-export CFLAGS="-O2 -fno-omit-frame-pointer -gline-tables-only -fsanitize-coverage=trace-pc-guard,trace-cmp,trace-gep,trace-div"
-export CXXFLAGS="-O2 -fno-omit-frame-pointer -gline-tables-only -fsanitize-coverage=trace-pc-guard,trace-cmp,trace-gep,trace-div"
+export FUZZ_FLAGS="-O2 -fno-omit-frame-pointer -gline-tables-only -fsanitize-coverage=trace-pc-guard,trace-cmp,trace-gep,trace-div"
+# using gcov
+export GCOV_FLAGS="-O0 -fprofile-arcs -ftest-coverage"
