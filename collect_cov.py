@@ -4,12 +4,11 @@ import shlex
 import re
 import sys
 
+# usage:  python3 collect_cov.py <project_name>
 def main(argv):
     if len(argv) < 1:
         print("Please input the project name (eg. json-2017-02-12)")
         return
-
-   
 
     project_name = argv[0] # eg. "json-2017-02-12"
     project_path = "/RUN_EXPERIMENT/RUNDIR-" + project_name + "/"  # hardcode path eg. /RUN_EXPERIMENT/RUNDIR-json-2017-02-12/
@@ -28,7 +27,7 @@ def main(argv):
         process = subprocess.run(split_afl, capture_output=True)
         output = process.stdout.decode("utf-8")
         # write the crash info to report
-  ghop[j[-]]      if (re.search("No samples", output)):
+        if (re.search("No samples", output)):
             f.write(str(now) + " No samples found. Check directory settings!\n")
         elif (re.search("No unseen", output)):
             f.write(str(now) + "No unseen samples found. Check your database for results!\n")
