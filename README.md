@@ -3,6 +3,7 @@
 * `gcc`
 * `clang`
 * `libpng-dev`
+* `nasm`
 * `libarchive-dev`
 * `inotify-tools`
 
