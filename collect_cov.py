@@ -43,7 +43,7 @@ def main(argv):
         # gcov -b 
         # command_line_gcov = "gcov -b RUNDIR-sqlite-2016-11-14/sqlite3" # for testing
         # since gcov could not recognize *, manully loop the gcda file one by one
-        for file in glob.glob( project_path + "*.gcda"):
+        for file in glob.glob( project_path + "**/*.gcno", recursive=True):
             command_line_gcov = "gcov -b " + file
             print("EXCUTE: " + command_line_gcov)
             splited_gcov = shlex.split(command_line_gcov)
