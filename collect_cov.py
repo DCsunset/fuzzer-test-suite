@@ -3,6 +3,8 @@ import subprocess
 import shlex
 import re
 import sys
+import os
+import glob
 
 # usage:  python3 collect_cov.py <project_name>
 def main(argv):
@@ -26,6 +28,8 @@ def main(argv):
         split_afl = shlex.split(command_line_afl)
         process = subprocess.run(split_afl, capture_output=True)
         output = process.stdout.decode("utf-8")
+        error = process.stderr.decode("utf-8")
+        print("error: " + error)
         # write the crash info to report
         if (re.search("No samples", output)):
             f.write(str(now) + " No samples found. Check directory settings!\n")
@@ -38,21 +42,31 @@ def main(argv):
 
         # gcov -b 
         # command_line_gcov = "gcov -b RUNDIR-sqlite-2016-11-14/sqlite3" # for testing
-        command_line_gcov = "gcov -b " + project_path + project_short_name
-        splited_gcov = shlex.split(command_line_gcov)
-        process_gcov = subprocess.run(splited_gcov, capture_output=True)
-        output = process_gcov.stdout.decode("utf-8")
-        # write the coverage info to report
-        match = re.search("(Lines executed:(\d+\.*\d*)% of \d+)", output)
-        if (match):
-            f.write(str(now) + " " + match.group(0) + "\n")
-        match = re.search("(Branches executed:(\d+\.*\d*)% of \d+)", output)
-        if (match):
-            f.write(str(now) + " " + match.group(0) + "\n")
-        match = re.search("(Taken at least once:(\d+\.*\d*)% of \d+)", output)
-        if (match):
-            f.write(str(now) + " " + match.group(0) + "\n")
+        for file in glob.glob( project_path + "*.gcda"):
+            print(file)
+            command_line_gcov = "gcov -b " + file
+            print("EXCUTE: " + command_line_gcov)
+            splited_gcov = shlex.split(command_line_gcov)
+            process_gcov = subprocess.run(splited_gcov, capture_output=True, cwd=os.getcwd())
+            output = process_gcov.stdout.decode("utf-8")
+            error = process_gcov.stderr.decode("utf-8")
+            print("Error: " + error)
 
+            # Split the files information
+            blocks = output.split("\n\n")
+            # Drop the library files information
+            for block in blocks:
+                if re.search("/usr/include", block) is None:
+                    # write the coverage info to report
+                    match = re.search("(Lines executed:(\d+\.*\d*)% of \d+)", block)
+                    if (match):
+                        f.write(str(now) + " " + match.group(0) + "\n")
+                    match = re.search("(Branches executed:(\d+\.*\d*)% of \d+)", block)
+                    if (match):
+                        f.write(str(now) + " " + match.group(0) + "\n")
+                    match = re.search("(Taken at least once:(\d+\.*\d*)% of \d+)", block)
+                    if (match):
+                        f.write(str(now) + " " + match.group(0) + "\n")
 
         f.close()
         count += 1
