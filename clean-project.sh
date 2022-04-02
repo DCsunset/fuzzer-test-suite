@@ -24,8 +24,9 @@ for name in $@; do
 	for f in $BENCHMARKS
 	do
 		file_name="$(basename $f)"
-		echo "Deleting $file_name from-${file_name#RUNDIR-}.out"
-		rm -rf $f rm -rf ${PARENT_DIR}/from-${file_name#RUNDIR-}.out
+		echo "Deleting $file_name..."
+		rm -rf $f ${PARENT_DIR}/from-${file_name#RUNDIR-}.out 
+		rm -f ${PARENT_DIR}/../${file_name#RUNDIR-}_report.txt
 	done
 done
 
