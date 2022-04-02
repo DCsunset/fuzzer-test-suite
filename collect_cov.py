@@ -14,10 +14,10 @@ def main(argv):
 
     project_name = argv[0] # eg. "json-2017-02-12"
     project_path = "./RUN_EXPERIMENT/RUNDIR-" + project_name + "/"  # hardcode path eg. /RUN_EXPERIMENT/RUNDIR-json-2017-02-12/
-    project_short_name = project_name.split("-")[0]
-    project_name_afl =  project_name + "-afl"
-    corpus_folder_name = "CORPUS-" + project_name_afl
-    report_file_name = project_name + "_report.txt" # output file for analysis
+    project_short_name = project_name.split("-")[0]  # eg. json
+    project_name_afl =  project_name + "-afl"  # eg. json-2017-02-12-afl
+    corpus_folder_name = "CORPUS-" + project_name_afl # eg. CORPUS-json-2017-02-12-afl
+    report_file_name = project_name + "_report.txt" # output file for analysis eg. json-2017-02-12_report.txt
     count = 0
     while(count >= 0):
         now = int (time.time())
@@ -42,8 +42,8 @@ def main(argv):
 
         # gcov -b 
         # command_line_gcov = "gcov -b RUNDIR-sqlite-2016-11-14/sqlite3" # for testing
+        # since gcov could not recognize *, manully loop the gcda file one by one
         for file in glob.glob( project_path + "*.gcda"):
-            print(file)
             command_line_gcov = "gcov -b " + file
             print("EXCUTE: " + command_line_gcov)
             splited_gcov = shlex.split(command_line_gcov)
