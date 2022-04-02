@@ -24,7 +24,7 @@ def main(argv):
         f = open(report_file_name, "a")
 
         # afl-collect -r ./CORPUS-boringssl-2016-02-12-afl ./collect_crash -- boringssl-2016-02-12-afl @@
-        command_line_afl =  "afl-collect -r " + project_path + corpus_folder_name + " ./collect_crash -- " + project_path + project_name_afl + " @@" 
+        command_line_afl =  "afl-collect -r " + project_path + corpus_folder_name + " ./collect_crash_{} -- ".format(project_name) + project_path + project_name_afl + " @@" 
         split_afl = shlex.split(command_line_afl)
         process = subprocess.run(split_afl, capture_output=True)
         output = process.stdout.decode("utf-8")
