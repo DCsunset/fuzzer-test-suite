@@ -9,7 +9,7 @@ if [ "$#" -eq 0 ]; then
 	exit 1
 fi
 
-TAIL_FLAGS=${TAIL_FLAGS:-""}
+TAIL_FLAGS=${TAIL_FLAGS:-"-f"}
 
 for name in $@; do
 	found=0
