@@ -5,6 +5,9 @@ set -x
 rm -rf $CORPUS
 mkdir $CORPUS
 
+# remove seeds larger than 1M or AFL will throw an error
+find ./seeds -size +1M | xargs rm
+
 EXECUTABLE_NAME_COVERAGE=$(basename $SCRIPT_DIR)-coverage
 seed_dirs="$CORPUS/fuzzer1/queue"
 # Master
