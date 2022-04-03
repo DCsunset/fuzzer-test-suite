@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import pandas as pd
 import numpy as np
 import scipy.stats as stats
@@ -7,15 +8,11 @@ from scipy.stats import kendalltau
 import matplotlib.pyplot as plt
 import seaborn as sns
 import time, datetime
+import sys
+
 sns.set_style("whitegrid")
 
-file_list = [
-    'freetype2-2017_report.txt',
-    'sqlite-2016-11-14_report.txt',
-    'libjpeg-turbo-07-2017_report.txt',
-    'lcms-2017-03-21_report.txt'
-]
-for file in file_list:
+for file in sys.argv[1:]:
     line_coverage = {}
     branch_coverage = {}
     line_sum = 0
@@ -73,9 +70,6 @@ for file in file_list:
     plt.legend((p1, p2), ('Line Coverage', 'Branch Coverage'),loc = 'best')
     plt.title(file.split(".")[0])
     plt.show()
-
-
-
 
 
 
