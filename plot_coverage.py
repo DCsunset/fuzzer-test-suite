@@ -33,16 +33,16 @@ for file in sys.argv[1:]:
                 otherStyleTime = time.strftime("%m--%d %H:%M", timeArray)
                 print(otherStyleTime)
                 if cur_time != 0:
-                    line_coverage[otherStyleTime] = line_cov / line_sum
-                    branch_coverage[otherStyleTime] = branch_cov / branch_sum
-                    print("line coverage", line_coverage[otherStyleTime], "lin_cov", line_cov, "line_sum", line_sum)
-                    print("branch coverage", branch_coverage[otherStyleTime], "branch_cov", branch_cov, "line_sum", branch_sum)
+                    line_coverage[cur_time] = line_cov / line_sum
+                    branch_coverage[cur_time] = branch_cov / branch_sum
+                    print("line coverage", line_coverage[cur_time], "lin_cov", line_cov, "line_sum", line_sum)
+                    print("branch coverage", branch_coverage[cur_time], "branch_cov", branch_cov, "line_sum", branch_sum)
                 bug_info = (" ").join(data_list[1:])
                 if bug_info.find("No samples found") != -1:
                     bugs_found = 0
                 elif bug_info.find("Successfully indexed") != -1:
                     bugs_found = int(data_list[3])
-                bugs_found_dict[otherStyleTime] = bugs_found
+                bugs_found_dict[cur_time] = bugs_found
                 cur_time = timestamp
                 line_sum = 0
                 line_cov = 0
@@ -66,8 +66,8 @@ for file in sys.argv[1:]:
                 # print("branch sum", branch_sum)
         timeArray = time.localtime(timestamp)
         otherStyleTime = time.strftime("%m--%d %H:%M", timeArray)
-        line_coverage[otherStyleTime] = line_cov / line_sum
-        branch_coverage[otherStyleTime] = branch_cov / branch_sum
+        line_coverage[cur_time] = line_cov / line_sum
+        branch_coverage[cur_time] = branch_cov / branch_sum
     
     #scatter plot for the dataset
     ax1 = plt.subplot(121)
@@ -75,16 +75,21 @@ for file in sys.argv[1:]:
     ax1.set_ylabel("Coverage")
 
     timestamp = list(line_coverage.keys())
+    object_time = int(timestamp[0])
+    for k in range(len(timestamp)):
+        timestamp[k] = str((int(timestamp[k]) -  object_time) // 60)
     line_coverage_value = line_coverage.values()
     branch_coverage_value = branch_coverage.values()
     print(len(timestamp))
+    step = len(timestamp) // 5
     print(type(timestamp))
+    print(step)
     p1 = ax1.scatter(timestamp, line_coverage_value, color = 'b')
     p2 = ax1.scatter(timestamp, branch_coverage_value, color = 'r')
     # ax1.set_xticks([0, 20, 40, 60, 80], [timestamp[0], timestamp[20], timestamp[40], timestamp[60], timestamp[80]])
     ax1.legend((p1, p2), ('Line Coverage', 'Branch Coverage'),loc = 'best')
     ax1.set_title((file.split("/")[-1]).split(".")[0])
-    plt.xticks([0, 20, 40, 60, 80], [timestamp[0], timestamp[20], timestamp[40], timestamp[60], timestamp[80]], size = 10, rotation = -20)
+    plt.xticks([0 * step, 1 * step, 2 * step, 3 * step, 4 * step], [timestamp[0 * step], timestamp[1 * step], timestamp[2 * step], timestamp[3 * step], timestamp[4 * step]], size = 10, rotation = -20)
     ax2 = plt.subplot(122)
     ax2.set_xlabel("TimeStamp")
     ax2.set_ylabel("Bugs Found")
@@ -96,7 +101,7 @@ for file in sys.argv[1:]:
     ax2.set_title(file.split("/")[-1].split(".")[0])
     # labels = ax1.get_xticklabels()
     # plt.setp(labels, rotation=45, horizontalalignment='right')
-    plt.xticks([0, 20, 40, 60, 80], [timestamp[0], timestamp[20], timestamp[40], timestamp[60], timestamp[80]], size = 10, rotation = -20)
+    plt.xticks([0 * step, 1 * step, 2 * step, 3 * step, 4 * step], [timestamp[0 * step], timestamp[1 * step], timestamp[2 * step], timestamp[3 * step], timestamp[4 * step]], size = 10, rotation = -20)
     plt.show()
 
 
