@@ -8,6 +8,7 @@
 * `inotify-tools`
 * `subversion`
 * `libgcrypt20-dev`
+* `autoconf-archive`
 
 For data analysis, install [afl-utils](https://gitlab.com/rc0r/afl-utils.git).
 

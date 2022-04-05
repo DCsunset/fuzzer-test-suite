@@ -1,7 +1,7 @@
 #!/bin/sh
 set -e
 
-sudo apt install -y gcc clang libpng-dev libarchive-dev inotify-tools nasm subversion libgcrypt20-dev
+sudo apt install -y gcc clang libpng-dev libarchive-dev inotify-tools nasm subversion libgcrypt20-dev autoconf-archive
 cd ../afl-utils && sudo python3 setup.py install
 
 echo core | sudo tee /proc/sys/kernel/core_pattern
